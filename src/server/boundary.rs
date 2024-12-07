@@ -214,20 +214,6 @@ fn find_boundary(buf: &[u8], boundary: &[u8]) -> Result<usize, usize> {
     Err(buf.len())
 }
 
-#[cfg(feature = "bench")]
-impl<'a> BoundaryReader<io::Cursor<&'a [u8]>> {
-    fn new_with_bytes(bytes: &'a [u8], boundary: &str) -> Self {
-        Self::from_reader(io::Cursor::new(bytes), boundary)
-    }
-
-    fn reset(&mut self) {
-        // Dump buffer and reset cursor
-        self.source.seek(io::SeekFrom::Start(0));
-        self.state = Searching;
-        self.search_idx = 0;
-    }
-}
-
 impl<R> Borrow<R> for BoundaryReader<R> {
     fn borrow(&self) -> &R {
         self.source.get_ref()

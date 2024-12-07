@@ -664,7 +664,7 @@ impl Entries {
             Occupied(occupied) => {
                 // dedup the field name by reusing the key's `Arc`
                 headers.name = occupied.key().clone();
-                occupied.into_mut().push({ SavedField { headers, data }});
+                occupied.into_mut().push(SavedField { headers, data });
             },
         }
 
