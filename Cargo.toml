@@ -35,4 +35,6 @@ env_logger = "0.5"
 
 [features]
 default = ["quick-error"]
+server = ["quick-error"]
+client = ["quick-error"]
 quick-error = []

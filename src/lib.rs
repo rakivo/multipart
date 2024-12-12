@@ -5,6 +5,7 @@
 // http://opensource.org/licenses/MIT>, at your option. This file may not be
 // copied, modified, or distributed except according to those terms.
 
+#[cfg(any(feature = "server", feature = "server"))]
 #[macro_use]
 extern crate log;
 
@@ -14,6 +15,7 @@ extern crate rand;
 extern crate tempfile;
 
 #[cfg(feature = "quick-error")]
+#[cfg(any(feature = "server", feature = "server"))]
 #[macro_use]
 extern crate quick_error;
 
@@ -22,6 +24,7 @@ extern crate safemem;
 #[cfg(test)]
 extern crate env_logger;
 
+#[cfg(any(feature = "server", feature = "server"))]
 use rand::Rng;
 
 /// Chain a series of results together, with or without previous results.
@@ -59,8 +62,12 @@ macro_rules! chain_result {
     );
 }
 
+#[cfg(feature = "server")]
 pub mod server;
+#[cfg(feature = "client")]
+pub mod client;
 
+#[cfg(any(feature = "server", feature = "server"))]
 fn random_alphanumeric(len: usize) -> String {
     rand::thread_rng()
         .sample_iter(&rand::distributions::Alphanumeric)
